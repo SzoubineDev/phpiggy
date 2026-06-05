@@ -9,8 +9,10 @@ class App{
     }
     function run(){
         echo "application is running";
-}
-
-}
+    }
+    public function add (string $path){
+    $this->router->add($path);
+    }
+    }
 
  
