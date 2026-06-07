@@ -1,18 +1,22 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace Framework;
-class App{
+
+class App
+{
     private Router $router;
     public function __construct()
     {
         $this->router = new Router();
     }
-    function run(){
+    function run()
+    {
         echo "application is running";
     }
-    public function get (string $path){
-    $this->router->add('GET',$path);
+    public function get(string $path, array $controller)
+    {
+        $this->router->add('GET', $path, $controller);
     }
-    }
-
- 
+}
