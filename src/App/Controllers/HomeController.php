@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Config\Paths;
 use Framework\TemplateEngine;
 
 class HomeController
@@ -12,11 +13,10 @@ class HomeController
 
     public function __construct()
     {
-        $this->view = new TemplateEngine();
+        $this->view = new TemplateEngine(Paths::VIEW);
     }
     public function home()
     {
-        dd($this->view);
-        echo  "home page ";
+        $this->view->render("\index.php");
     }
 }
