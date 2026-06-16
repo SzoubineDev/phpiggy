@@ -8,10 +8,14 @@ class App
 {
     private Router $router;
     private Container $container;
-    public function __construct()
+    public function __construct(?string  $newDefinitionPath = null)
     {
         $this->router = new Router();
         $this->container = new Container();
+        if ($newDefinitionPath) {
+            $newDefinition = include $newDefinitionPath;
+            $this->container->addDefinitions($newDefinition);
+        }
     }
     function run()
     {
