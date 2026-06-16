@@ -2,4 +2,9 @@
 
 declare(strict_types=1);
 
-return ["definitions"];
+use Framework\TemplateEngine;
+use App\Config\Paths;
+
+return [
+    TemplateEngine::class => fn() => new TemplateEngine(Paths::VIEW)
+];

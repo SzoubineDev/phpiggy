@@ -9,8 +9,7 @@ class Container
     private array $definitions;
     public function addDefinitions(array $newDefinitions)
     {
-        dd($newDefinitions);
+        $this->definitions[] = [$newDefinitions];
+        dd($this->definitions);
     }
 }
-
-
