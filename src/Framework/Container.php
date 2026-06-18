@@ -20,6 +20,14 @@ class Container
         if (!$reflectionclass->isInstantiable()) {
             throw new ContainerException("{$className}isn't instantiable!");
         }
-        dd($reflectionclass);
+        $constructor = $reflectionclass->getConstructor();
+        if (!$constructor) {
+            return new $className;
+        }
+        $parameters = $constructor->getParameters();
+        if (count($parameters) === 0) {
+            return new $className;
+        }
+        dd($parameters);
     }
 }
