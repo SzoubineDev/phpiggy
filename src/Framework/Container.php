@@ -42,4 +42,9 @@ class Container
         }
         dd($parameters);
     }
+    public function get(string $id)
+    {
+        if (!array_key_exists($id, $this->definitions)) {
+        }
+    }
 }
