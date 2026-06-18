@@ -45,7 +45,7 @@ class Container
     public function get(string $id)
     {
         if (!array_key_exists($id, $this->definitions)) {
-            
+            throw new ContainerException("class {$id} does not exist in container!");
         }
     }
 }
