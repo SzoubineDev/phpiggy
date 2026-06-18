@@ -39,8 +39,10 @@ class Container
             if (!$type instanceof ReflectionNamedType || $type->isBuiltin()) {
                 throw new ContainerException("can't resolve class {$className} because invalid para name ");
             }
+
+            $dependencies[] = $this->get($type->getName());
         }
-        dd($parameters);
+        dd($dependencies);
     }
     public function get(string $id)
     {
