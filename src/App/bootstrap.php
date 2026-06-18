@@ -8,7 +8,6 @@ use Framework\App;
 use function App\Config\registerRoutes;
 use App\Config\Paths;
 
-
 $app = new App(Paths::SOURCE . 'App/container-definitions.php');
 registerRoutes($app);
 return $app;
