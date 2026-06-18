@@ -42,7 +42,7 @@ class Container
 
             $dependencies[] = $this->get($type->getName());
         }
-        dd($dependencies);
+        return $reflectionclass->newInstanceArgs($dependencies);
     }
     public function get(string $id)
     {
