@@ -18,7 +18,7 @@
     <header class="header">
         <div class="container">
             <div class="header-inner">
-                <a href="/" class="header-logo">Wallet</a>
+                <a href="/" class="header-logo"><?php echo $title; ?></a>
 
                 <!-- Desktop Nav -->
                 <nav class="header-nav">
