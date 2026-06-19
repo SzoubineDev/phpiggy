@@ -42,3 +42,4 @@ class Router
         $this->middlewares[] = $middleware;
     }
 }
+
