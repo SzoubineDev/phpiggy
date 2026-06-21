@@ -7,11 +7,11 @@ namespace App\Controllers;
 
 use Framework\TemplateEngine;
 
-class RegisterController
+class AuthController
 {
 
     public function __construct(private TemplateEngine $view) {}
-    public function register()
+    public function registerView()
     {
         echo $this->view->render("register.php", []);
     }

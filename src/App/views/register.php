@@ -1,64 +1,77 @@
 <?php include $this->resolve("partials/_header.php") ?>
-
-<div class="container" style="max-width: 500px; margin-top: 3rem; margin-bottom: 3rem;">
-    <div class="bg-white rounded-xl shadow-sm" style="padding: 2rem; border: 1px solid #f3f4f6;">
-        <h2 style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700; text-align: center; margin-bottom: 1.5rem; color: #111827;">
-            Create Account
-        </h2>
-
-        <form action="/register" method="POST" style="display: flex; flex-direction: column; gap: 1.25rem;">
-
-            <div class="form-group">
-                <label for="name" class="form-label">Full Name</label>
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="John Doe"
-                    class="form-input">
+<section
+    class="max-w-2xl mx-auto mt-12 p-4 bg-white shadow-md border border-gray-200 rounded">
+    <form action="/register" method="POST" class="grid grid-cols-1 gap-6">
+        <!-- Email -->
+        <label class="block">
+            <span class="text-gray-700">Email address</span>
+            <input name="email"
+                type="email"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                placeholder="john@example.com" />
+        </label>
+        <!-- Age -->
+        <label class="block">
+            <span class="text-gray-700">Age</span>
+            <input name="age"
+                type="number"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                placeholder="" />
+        </label>
+        <!-- Country -->
+        <label class="block">
+            <span class="text-gray-700">Country</span>
+            <select name="country"
+                class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <option value="USA">USA</option>
+                <option value="Canada">Canada</option>
+                <option value="Mexico">Mexico</option>
+                <option value="Invalid">Invalid Country</option>
+            </select>
+        </label>
+        <!-- Social Media URL -->
+        <label class="block">
+            <span class="text-gray-700">Social Media URL</span>
+            <input name="socialMediaURL"
+                type="text"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                placeholder="" />
+        </label>
+        <!-- Password -->
+        <label class="block">
+            <span class="text-gray-700">Password</span>
+            <input name="password"
+                type="password"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                placeholder="" />
+        </label>
+        <!-- Confirm Password -->
+        <label class="block">
+            <span class="text-gray-700">Confirm Password</span>
+            <input name="confirmedPassword"
+                type="password"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                placeholder="" />
+        </label>
+        <!-- Terms of Service -->
+        <div class="block">
+            <div class="mt-2">
+                <div>
+                    <label class="inline-flex items-center">
+                        <input name="tos"
+                            class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
+                            type="checkbox" />
+                        <span class="ml-2">I accept the terms of service.</span>
+                    </label>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="email" class="form-label">Email Address</label>
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="john@example.com"
-                    class="form-input">
-            </div>
-
-            <div class="form-group">
-                <label for="password" class="form-label">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    class="form-input">
-            </div>
-
-            <div class="form-group">
-                <label for="confirm_password" class="form-label">Confirm Password</label>
-                <input
-                    type="password"
-                    id="confirm_password"
-                    name="confirm_password"
-                    class="form-input">
-            </div>
-
-            <div style="display: flex; align-items: center;">
-                <input type="checkbox" id="terms" name="terms">
-                <label for="terms" style="margin-left: 0.5rem; font-size: 0.875rem; color: #6b7280;">
-                    I agree to the Terms and Conditions
-                </label>
-            </div>
-
-            <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
-                Register
-            </button>
-
-        </form>
-    </div>
-</div>
+        </div>
+        <button
+            type="submit"
+            class="block w-full py-2 bg-indigo-600 text-white rounded">
+            Submit
+        </button>
+    </form>
+</section>
 
 <?php include $this->resolve("partials/_footer.php") ?>
