@@ -24,6 +24,6 @@ class ValidatorService
             'confirmedPassword' => ['required'],
             'socialMediaURL' => ['required'],
             'tos' => ['required'],
-        ], []);
+        ]);
     }
 }
