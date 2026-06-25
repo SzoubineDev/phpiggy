@@ -13,8 +13,8 @@ class Validator
     {
         $this->rules[$alias] = $rule;
     }
-    public function validate(array $formData)
+    public function validate(array $formData, array $feilds, array $params)
     {
-        dd($formData);
+        
     }
 }
