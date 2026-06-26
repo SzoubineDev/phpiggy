@@ -1,6 +1,35 @@
 <?php
 
-declare(strict_types=1);
-include __DIR__ . "/../src/App/functions.php";
-$app = include __DIR__ . "/../src/App/bootstrap.php";
-$app->run();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// declare(strict_types=1);
+// include __DIR__ . "/../src/App/functions.php";
+// $app = include __DIR__ . "/../src/App/bootstrap.php";
+// $app->run();
