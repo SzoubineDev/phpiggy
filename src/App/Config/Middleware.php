@@ -12,3 +12,4 @@ function registerMiddleware(App $app)
     $app->addMiddleware(TemplateDataMiddleware::class);
     $app->addMiddleware(ValidationExceptionMiddleware::class);
 }
+
