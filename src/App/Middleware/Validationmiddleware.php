@@ -8,8 +8,8 @@ use Framework\Contracts\MiddlewareInterface;
 
 class Validationmiddleware implements MiddlewareInterface
 {
-    public function process(callable $next) {
-        try 
-         $next();
+    public function process(callable $next)
+    {
+        $next();
     }
 }

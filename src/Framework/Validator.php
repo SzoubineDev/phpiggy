@@ -18,7 +18,6 @@ class Validator
     {
         $errors = [];
         foreach ($feilds as $feildName => $rules) {
-
             foreach ($rules as $rule) {
                 $formValidator = $this->rules[$rule];
                 if ($formValidator->validate($formData, $feildName, [])) {
@@ -28,7 +27,7 @@ class Validator
             }
         }
         if (count($errors)) {
-            throw new ValidationException();
+            throw new ValidationException($errors);
         }
     }
 }
