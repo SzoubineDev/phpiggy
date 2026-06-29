@@ -6,12 +6,17 @@ namespace App\Middleware;
 
 use Framework\Contracts\MiddlewareInterface;
 use Framework\Exceptions\ValidationException;
-use Override;
+use Framework\TemplateEngine;
+use App\Config\Paths;
 
 class ValidationExceptionMiddleware implements MiddlewareInterface
 {
+    public function __construct() {}
     public function process(callable $next)
     {
-        $next();
+        try {
+            $next();
+        } catch (ValidationException $e) {
+        }
     }
 }
