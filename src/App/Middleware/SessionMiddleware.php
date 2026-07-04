@@ -14,11 +14,11 @@ class SessionMiddleware implements MiddlewareInterface
         if (session_status() === PHP_SESSION_ACTIVE) {
             throw new SessionException("session is currently active");
         }
-        echo "hello";
-        if (headers_sent()) {
-            throw new SessionException("headers alredy sent ");
+        if (headers_sent($filename, $line)) {
+            throw new SessionException("headers alredy sent from file : {$filename} Line : {$line} ");
         }
         session_start();
         $next();
+        session_write_close();
     }
 }
