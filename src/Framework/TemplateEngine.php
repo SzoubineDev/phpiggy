@@ -22,7 +22,7 @@ class TemplateEngine
     {
         return "{$this->basePath}/{$path}";
     }
-    public function addGlobal(string $key, string $value)
+    public function addGlobal(string $key, mixed $value)
     {
         $this->gloabalTemplateVariables[$key] = $value;
     }
