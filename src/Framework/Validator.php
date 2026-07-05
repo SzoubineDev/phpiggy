@@ -25,10 +25,10 @@ class Validator
                     $rulePramaters = explode(',', $rulePramaters);
                 }
                 $formValidator = $this->rules[$rule];
-                if ($formValidator->validate($formData, $feildName, [])) {
+                if ($formValidator->validate($formData, $feildName, $rulePramaters)) {
                     continue;
                 }
-                $errors[$feildName][] = $formValidator->getMessage($formData, $feildName, []);
+                $errors[$feildName][] = $formValidator->getMessage($formData, $feildName, $rulePramaters);
             }
         }
         if (count($errors)) {
