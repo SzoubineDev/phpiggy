@@ -21,9 +21,8 @@ class Validator
             foreach ($rules as $rule) {
                 $rulePramaters = [];
                 if (str_contains($rule, ':')) {
-                    [$rule, $ruleParamters] = explode(':', $rule);
-                    $rulePramaters = explode(',', $ruleParamters);
-                    dd($rulePramaters);
+                    [$rule, $rulePramaters] = explode(':', $rule);
+                    $rulePramaters = explode(',', $rulePramaters);
                 }
                 $formValidator = $this->rules[$rule];
                 if ($formValidator->validate($formData, $feildName, [])) {
