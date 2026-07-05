@@ -19,6 +19,12 @@ class Validator
         $errors = [];
         foreach ($feilds as $feildName => $rules) {
             foreach ($rules as $rule) {
+                $rulePramaters = [];
+                if (str_contains($rule, ':')) {
+                    [$rule, $ruleParamters] = explode(':', $rule);
+                    $rulePramaters = explode(',', $ruleParamters);
+                    dd($rulePramaters);
+                }
                 $formValidator = $this->rules[$rule];
                 if ($formValidator->validate($formData, $feildName, [])) {
                     continue;
