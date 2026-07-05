@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use Framework\Rules\EmailRule;
+use Framework\Rules\{EmailRule, MinRule, RequiredRule};
 use Framework\Validator;
-use Framework\Rules\RequiredRule;
+
 
 class ValidatorService
 {
@@ -16,6 +16,7 @@ class ValidatorService
         $this->validator = new Validator();
         $this->validator->add('required', new RequiredRule());
         $this->validator->add('email', new EmailRule());
+        $this->validator->add('min', new MinRule());
     }
     public function validateRegister(array $fromData)
     {

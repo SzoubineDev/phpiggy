@@ -15,7 +15,7 @@
                     <?php echo e($errors['email'][0]); ?>
                 </div>
             <?php endif; ?>
-            
+
         </label>
         <!-- Age -->
         <label class="block">
