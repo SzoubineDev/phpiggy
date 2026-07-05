@@ -7,7 +7,6 @@ namespace App\Services;
 use Framework\Rules\{EmailRule, MinRule, RequiredRule};
 use Framework\Validator;
 
-
 class ValidatorService
 {
     private Validator $validator;
