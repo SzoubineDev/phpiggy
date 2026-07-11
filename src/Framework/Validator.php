@@ -28,6 +28,7 @@ class Validator
                 if ($formValidator->validate($formData, $feildName, $rulePramaters)) {
                     continue;
                 }
+
                 $errors[$feildName][] = $formValidator->getMessage($formData, $feildName, $rulePramaters);
             }
         }
