@@ -20,3 +20,5 @@ class FlashMiddleware implements MiddlewareInterface
         $next();
     }
 }
+
+

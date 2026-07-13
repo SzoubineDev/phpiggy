@@ -36,7 +36,7 @@
             <span class="text-gray-700">Country</span>
             <select name="country"
                 class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                <option value="USA">USA</option>
+                <option value="USA" <?php echo $oldFormdata['country'] ?? '' === 'USA' ? 'selected' : ''; ?>> USA</option>
                 <option value="Canada"
                     <?php echo (($oldFormData['country'] ?? '') === 'Canada') ? 'selected' : ''; ?>>
                     Canada
@@ -117,6 +117,7 @@
             Submit
         </button>
     </form>
+    <?php var_dump($oldFormData) ?>
 </section>
 
 <?php include $this->resolve("partials/_footer.php") ?>
