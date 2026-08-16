@@ -12,6 +12,6 @@ $password = '';
 try {
     $db = new PDO($dsn, $username, $password);
 } catch (PDOException $e) {
-
+    die('unable to connect to database');
 }
 echo "connected successfully !";
