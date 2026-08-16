@@ -9,5 +9,9 @@ $config = http_build_query(data: [
 $dsn =  "{$driver}:{$config}";
 $username = 'root';
 $password = '';
-$db = new PDO($dsn, $username, $password);
+try {
+    $db = new PDO($dsn, $username, $password);
+} catch (PDOException $e) {
+
+}
 echo "connected successfully !";
