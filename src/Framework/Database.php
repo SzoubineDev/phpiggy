@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Framework;
 
-use PDO;
+use PDO, PDOException;
 
 class Database
 {
@@ -13,6 +13,10 @@ class Database
     {
         $config = http_build_query(data: $config, arg_separator: ';');
         $dsn = "{$driver}:{$config}";
-        $this->connection = new PDO($dsn, $username, $password);
+        try {
+            $this->connection = new PDO($dsn, $username, $password);
+        } catch (PDOException $e) {
+            die('unable to connect to database');
+        }
     }
 }
