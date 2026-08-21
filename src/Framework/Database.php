@@ -9,7 +9,7 @@ use PDO, PDOException;
 class Database
 {
     public PDO $connection;
-    public function __construct(string $driver, array $config, string $username, $password)
+    public function __construct(string $driver, array $config, string $username, string $password)
     {
         $config = http_build_query(data: $config, arg_separator: ';');
         $dsn = "{$driver}:{$config}";

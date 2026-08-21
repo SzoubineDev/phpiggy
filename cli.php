@@ -1,17 +1,30 @@
 <?php
+include __DIR__ . "/src/Framework/Database.php";
 
-$driver = 'mydijdsql';
-$config = http_build_query(data: [
+use Framework\Database;
+
+$db = new Database('mysql', [
     'host' => 'localhost',
     'port' => 3306,
-    'dbname' => "phpiggy"
-], arg_separator: ';');
-$dsn =  "{$driver}:{$config}";
-$username = 'root';
-$password = '';
+    'dbname' => 'phpiggy'
+], 'root', '');
+
 try {
-    $db = new PDO($dsn, $username, $password);
-} catch (PDOException $e) {
-    die('unable to connect to database');
+    // $db->connection->beginTransaction();
+    // $db->connection->query("INSERT INTO products VALUES (99,'Gloves')");
+
+    $search = "Gloves";
+    $query = "SELECT * FROM products WHERE name = :name ";
+    $stm = $db->connection->prepare($query);
+    $stm->bindValue('name', $search, PDO::PARAM_STR);
+    $stm->execute();
+    var_dump($stm->fetchAll());
+
+    // $db->connection->commit();
+} catch (Exception $error) {
+
+    if ($db->connection->inTransaction()) {
+        $db->connection->rollBack();
+    }
+    echo "transaction faild! ";
 }
-echo "connected successfully !";
