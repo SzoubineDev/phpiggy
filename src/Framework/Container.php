@@ -15,6 +15,7 @@ class Container
     {
         $this->definitions = [...$this->definitions, ...$newDefinitions];
     }
+
     public function resolve(string $className)
     {
         $reflectionclass = new ReflectionClass($className);
@@ -54,7 +55,7 @@ class Container
         if (array_key_exists($id, $this->resolved)) {
             return $this->resolved[$id];
         };
-        $dependency = $factory();
+        $dependency = $factory($this);
         $this->resolved[$id] = $dependency;
         return $dependency;
     }
