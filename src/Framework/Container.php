@@ -35,8 +35,7 @@ class Container
             $name = $parameter->getName();
             $type = $parameter->getType();
             if (!$type) {
-                throw
-                new ContainerException("failed to resolve class{$className} because param {$name} is missing type hint");
+                throw new ContainerException("failed to resolve class{$className} because param {$name} is missing type hint");
             }
             if (!$type instanceof ReflectionNamedType || $type->isBuiltin()) {
                 throw new ContainerException("can't resolve class {$className} because invalid para name ");
