@@ -37,10 +37,7 @@ class Database
         $this->stm->execute($params);
         return $this;
     }
-    public function getDb(): Database
-    {
-        return $this;
-    }
+    
     public function count()
     {
         return  $this->stm->fetchColumn();
