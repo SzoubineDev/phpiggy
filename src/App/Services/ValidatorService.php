@@ -10,7 +10,7 @@ use Framework\Rules\{
     RequiredRule,
     InRule,
     URLRule,
-    MatchingRule
+    MatchingRule,
 };
 use Framework\Validator;
 

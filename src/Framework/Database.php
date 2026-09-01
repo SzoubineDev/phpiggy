@@ -9,7 +9,8 @@ use PDO, PDOException, PDOStatement;
 class Database
 {
     private PDO $connection;
-    private PDOStatement $stmt;
+    private PDOStatement $stm;
+    private Database $db;
 
     public function __construct(
         string $driver,
@@ -32,30 +33,16 @@ class Database
 
     public function query(string $query, array $params = []): Database
     {
-        $this->stmt = $this->connection->prepare($query);
-
-        $this->stmt->execute($params);
-
+        $this->stm = $this->connection->prepare($query);
+        $this->stm->execute($params);
         return $this;
     }
-
+    public function getDb(): Database
+    {
+        return $this;
+    }
     public function count()
     {
-        return $this->stmt->fetchColumn();
-    }
-
-    public function find()
-    {
-        return $this->stmt->fetch();
-    }
-
-    public function id()
-    {
-        return $this->connection->lastInsertId();
-    }
-
-    public function findAll()
-    {
-        return $this->stmt->fetchAll();
+        return  $this->stm->fetchColumn();
     }
 }

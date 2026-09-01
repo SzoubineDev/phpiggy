@@ -7,6 +7,8 @@ namespace App\Controllers;
 
 use Framework\TemplateEngine;
 use App\Services\{ValidatorService, UserService};
+use Exception;
+use Framework\Exceptions\ValidationException;
 
 class AuthController
 {
@@ -22,7 +24,9 @@ class AuthController
     }
     public function register()
     {
-        // dd($_POST);
         $this->validatorService->validateRegister($_POST);
+        $this->user_service->isEmailTaken($_POST['email']);
+        $this->user_service->create($_POST);
+        rediretTo('/');
     }
 }
