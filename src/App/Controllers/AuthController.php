@@ -22,11 +22,19 @@ class AuthController
     {
         echo $this->view->render("register.php");
     }
+    public function loginView()
+    {
+        echo $this->view->render("login.php");
+    }
     public function register()
     {
         $this->validatorService->validateRegister($_POST);
         $this->user_service->isEmailTaken($_POST['email']);
         $this->user_service->create($_POST);
         rediretTo('/');
+    }
+    public function login()
+    {
+        $this->validatorService->validateLogin($_POST);
     }
 }

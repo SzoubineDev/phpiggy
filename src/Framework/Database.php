@@ -37,9 +37,16 @@ class Database
         $this->stm->execute($params);
         return $this;
     }
-    
+
     public function count()
     {
         return  $this->stm->fetchColumn();
+    }
+
+    public function find(string $query, array $params)
+    {
+        $this->stm = $this->connection->prepare($query);
+        $this->stm->execute($params);
+        return $this->stm->fetchColumn();
     }
 }
