@@ -43,10 +43,8 @@ class Database
         return  $this->stm->fetchColumn();
     }
 
-    public function find(string $query, array $params)
+    public function find()
     {
-        $this->stm = $this->connection->prepare($query);
-        $this->stm->execute($params);
-        return $this->stm->fetchColumn();
+        return $this->stm->fetch();
     }
 }

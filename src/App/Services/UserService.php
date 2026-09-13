@@ -38,4 +38,10 @@ class UserService
             'country' => $formData['country']
         ]);
     }
+    public function login(array $formData)
+    {
+        $user = $this->db->query("SELECT * FROM users WHERE email = :email", [
+            'email' => $formData['email']
+        ])->find();
+    }
 }

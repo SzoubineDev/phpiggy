@@ -36,5 +36,6 @@ class AuthController
     public function login()
     {
         $this->validatorService->validateLogin($_POST);
+        $this->user_service->login($_POST);
     }
 }
