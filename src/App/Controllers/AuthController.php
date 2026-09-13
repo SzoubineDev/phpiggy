@@ -37,5 +37,6 @@ class AuthController
     {
         $this->validatorService->validateLogin($_POST);
         $this->user_service->login($_POST);
+        rediretTo('/');
     }
 }

@@ -20,7 +20,7 @@ class UserService
         )->count();
 
         if ($emailCount > 0) {
-            throw new ValidationException(['email' => 'This Email is Taken']);
+            throw new ValidationException(['email' => ['This Email is Taken']]);
         }
     }
     public function create(array $formData)
@@ -43,5 +43,12 @@ class UserService
         $user = $this->db->query("SELECT * FROM users WHERE email = :email", [
             'email' => $formData['email']
         ])->find();
+
+        $passwordMatch = password_verify($formData['password'], $user['password'] ?? '');
+        if (!$user || !$passwordMatch) {
+            throw new ValidationException(['password' => ['invalid credentials! ']]);
+        }
+
+        $_SESSION['id'] = $user["id"];
     }
 }
