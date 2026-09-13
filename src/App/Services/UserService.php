@@ -45,6 +45,7 @@ class UserService
         ])->find();
 
         $passwordMatch = password_verify($formData['password'], $user['password'] ?? '');
+        
         if (!$user || !$passwordMatch) {
             throw new ValidationException(['password' => ['invalid credentials! ']]);
         }
