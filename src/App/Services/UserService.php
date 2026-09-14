@@ -45,11 +45,11 @@ class UserService
         ])->find();
 
         $passwordMatch = password_verify($formData['password'], $user['password'] ?? '');
-        
+
         if (!$user || !$passwordMatch) {
             throw new ValidationException(['password' => ['invalid credentials! ']]);
         }
-
-        $_SESSION['id'] = $user["id"];
+        session_regenerate_id();
+        $_SESSION['user'] = $user["id"];
     }
 }
