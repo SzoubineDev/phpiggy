@@ -10,6 +10,16 @@ class CsrfGuardMiddleware implements MiddlewareInterface
 {
     public function process(callable $next)
     {
+        $requestMethod = strtoupper($_SERVER['REQUEST_METHOD']);
+        $validMethods = ['POST', 'PATCH', 'DELETE'];
+        if (!in_array($requestMethod, $validMethods)) {
+            $next();
+            return;
+        }
+        if ($_SESSION['token'] !== $_POST['token']) {
+            rediretTo('/');
+        }
+        unset($_SESSION['token']);
         $next();
     }
 }
