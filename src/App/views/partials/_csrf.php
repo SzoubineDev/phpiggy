@@ -1,0 +1,1 @@
+<input value="<?php echo e($csrfToken) ?>" type="hidden" name="token" />
