@@ -1115,7 +1115,7 @@ hr {
   outline-offset: 2px;
 }
 .focus-visible\:outline-indigo-600:focus-visible {
-  outline-color: #4f46e5;
+  outline-color: #e55946;
 }
 @media (min-width: 640px) {
   .sm\:px-0 {
