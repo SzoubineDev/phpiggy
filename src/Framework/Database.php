@@ -8,7 +8,7 @@ use PDO, PDOException, PDOStatement;
 
 class Database
 {
-    private PDO $connection;
+    public PDO $connection;
     private PDOStatement $stm;
     private Database $db;
 
