@@ -6,7 +6,13 @@ use Framework\Contracts\RuleInterface;
 
 class NumericRule implements RuleInterface
 {
-    public function validate(array $data, string $field, array $params): bool {}
+    public function validate(array $data, string $field, array $params): bool
+    {
+        return is_numeric($data[$field]);
+    }
 
-    public function getMessage(array $data, string $field, array $params): string {}
+    public function getMessage(array $data, string $field, array $params): string
+    {
+        return "this field must be numeric";
+    }
 }
