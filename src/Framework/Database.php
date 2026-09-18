@@ -45,8 +45,9 @@ class Database
 
     public function find()
     {
-        return $this->stm->fetch();
+        return  $this->stm->fetch();
     }
+
     public function id()
     {
         return $this->connection->lastInsertId();

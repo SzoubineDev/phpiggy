@@ -9,16 +9,18 @@ use Framework\Database;
 class TransactionService
 {
     public function __construct(private Database $db) {}
+
     public function create(array $formData)
     {
+        $formattedDate = "{$formData['date']} 00:00:00";
         $this->db->query(
-            "INSERT INTO transactions (user_id,description,amount,date)
-             VALUES (:user_id,:description,:amount,:date)",
+            "INSERT INTO transactions (user_id, description, amount, date)
+            VALUES (:user_id,:description,:amount,:date)",
             [
                 'user_id' => $_SESSION['user'],
                 'description' => $formData['description'],
                 'amount' => $formData['amount'],
-                'date' => $formData['date']
+                'date' => $formattedDate
             ]
         );
     }
