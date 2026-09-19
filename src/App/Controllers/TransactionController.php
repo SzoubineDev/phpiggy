@@ -26,4 +26,8 @@ class TransactionController
         $this->transaction_service->create($_POST);
         rediretTo('/');
     }
+    // public function search()
+    // {
+    //     $this->transaction_service->searchTransaction($_GET);
+    // }
 }

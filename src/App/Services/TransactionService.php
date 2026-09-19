@@ -24,16 +24,26 @@ class TransactionService
             ]
         );
     }
-    public function getUserTransactions()
+    public function getUserTransactions(int $length, int $offset)
     {
+        $searchedTerm = addcslashes($_GET['s'] ?? '', '%_');
         $transactions = $this->db->query(
-            "SELECT *,DATE_FORMAT(date,'%Y-%m-%d') as formtted_date 
-            FROM transactions WHERE user_id = :user_id",
+            "SELECT *,DATE_FORMAT(date,'%Y-%m-%d') as formatted_date 
+            FROM transactions WHERE user_id = :user_id AND description LIKE :description LIMIT {$length} OFFSET {$offset}",
             [
-                'user_id' => $_SESSION['user']
+                'user_id' => $_SESSION['user'],
+                'description' => "%{$searchedTerm}%"
             ]
         )->findAll();
 
         return $transactions;
     }
+    // public function searchTransaction(array $formData)
+    // {
+    //     $transactions = $this->db->query("SELECT *,DATE_FORMAT(date,'%Y-%m-%d') as formatted_date 
+    //     FROM transactions WHERE description LIKE :keyword", [
+    //         "keyword" => $formData['s']
+    //     ])->findAll();
+    //     return $transactions;
+    // }
 }

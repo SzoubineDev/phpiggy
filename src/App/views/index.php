@@ -69,7 +69,7 @@
                         </div>
                     </td>
                     <!-- Date -->
-                    <td class="p-4 text-sm text-gray-600"><?php echo e($transaction['formtted_date']); ?></td>
+                    <td class="p-4 text-sm text-gray-600"><?php echo e($transaction['formatted_date']); ?></td>
                     <!-- Actions -->
                     <td class="p-4 text-sm text-gray-600 flex justify-center space-x-2">
                         <a href="#" class="p-2 bg-amber-50 text-xs text-amber-900 hover:bg-amber-500 hover:text-white transition rounded">
