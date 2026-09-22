@@ -10,6 +10,7 @@ class TemplateEngine
     public function __construct(private string $basePath) {}
     public function render(string $template, array $data = [])
     {
+        $_SESSION['page']  = $_SESSION['page'] ?? $data;
         extract($data, EXTR_SKIP);
         extract($this->gloabalTemplateVariables, EXTR_SKIP);
         ob_start();

@@ -17,7 +17,26 @@ class HomeController
         $page  = (int)($_GET['p'] ?? 1);
         $length = 3;
         $offset = ($page - 1) * $length;
-        $transactions = $this->transaction_service->getUserTransactions($length, $offset);
-        echo $this->view->render("index.php", ['transactions' => $transactions]);
+        $searchTerm = $_GET['s'] ?? null;
+        [$transactions, $count] = $this->transaction_service->getUserTransactions($length, $offset);
+        $lastPage = ceil($count / $length);
+        $currentPage = (int)($_GET['c'] ?? 1);
+        echo $this->view->render("index.php", [
+            'transactions' => $transactions,
+            'currentPage' => $page,
+            'previousPageQuery' => http_build_query([
+                's' => $searchTerm,
+                'p' => $page - 1
+            ]),
+            'lastPage' => $lastPage,
+            'nextPageQuery' => http_build_query([
+                's' => $searchTerm,
+                'p' => $page + 1
+            ]),
+            'currentPageQuery' => http_build_query([
+                's' => $searchTerm,
+                'p' => $page,
+            ])
+        ]);
     }
 }
