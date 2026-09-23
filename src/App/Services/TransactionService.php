@@ -36,7 +36,6 @@ class TransactionService
             FROM transactions WHERE user_id = :user_id AND description LIKE :description LIMIT {$length} OFFSET {$offset}",
             $params
         )->findAll();
-        
         $transactionsCount = $this->db->query("SELECT COUNT(*) FROM transactions 
         WHERE user_id = :user_id AND description LIKE :description", $params)->count();
         return [$transactions, $transactionsCount];
