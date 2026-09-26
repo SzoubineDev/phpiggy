@@ -26,7 +26,33 @@ class TransactionController
         $this->transaction_service->create($_POST);
         rediretTo('/');
     }
-    public function editView(array $params) {
-        
+    public function editView(array $params)
+    {
+        $transaction = $this->transaction_service->getTransaction($params['transaction']);
+        if (!$transaction) {
+            rediretTo('/');
+        }
+        echo $this->view->render("transactions/update.php", [
+            'transaction' => $transaction
+        ]);
+    }
+    public function update(array $params)
+    {
+        $transaction = $this->transaction_service->getTransaction($params['transaction']);
+        if (!$transaction) {
+            rediretTo('/');
+        }
+        $this->validator_service->validateTransaction($_POST);
+        $this->transaction_service->update($_POST, $transaction['id']);
+        rediretTo($_SERVER['HTTP_REFERER']);
+    }
+    public function delete(array $params)
+    {
+        $transaction = $this->transaction_service->getTransaction($params['transaction']);
+        if (!$transaction) {
+            rediretTo('/');
+        }
+        $this->transaction_service->delete((int)$params['transaction']);
+        rediretTo('/');
     }
 }
