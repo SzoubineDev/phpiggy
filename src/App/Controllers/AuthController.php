@@ -31,17 +31,17 @@ class AuthController
         $this->validatorService->validateRegister($_POST);
         $this->user_service->isEmailTaken($_POST['email']);
         $this->user_service->create($_POST);
-        rediretTo('/');
+        redirectTo('/');
     }
     public function login()
     {
         $this->validatorService->validateLogin($_POST);
         $this->user_service->login($_POST);
-        rediretTo('/');
+        redirectTo('/');
     }
     public function logout()
     {
         $this->user_service->logout();
-        rediretTo('/login');
+        redirectTo('/login');
     }
 }

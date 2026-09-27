@@ -40,7 +40,7 @@ class TransactionService
         WHERE user_id = :user_id AND description LIKE :description", $params)->count();
         return [$transactions, $transactionsCount];
     }
-    public function getTransaction(string $id)
+    public function getUserTransaction(string $id)
     {
         $transaction = $this->db->query("SELECT *,DATE_FORMAT(date, '%Y-%m-%d') as formatted_date
          FROM transactions WHERE id = :id AND user_id = :user_id", [
@@ -68,13 +68,4 @@ class TransactionService
             'id' => $id
         ]);
     }
-
-    // public function searchTransaction(array $formData)
-    // {
-    //     $transactions = $this->db->query("SELECT *,DATE_FORMAT(date,'%Y-%m-%d') as formatted_date 
-    //     FROM transactions WHERE description LIKE :keyword", [
-    //         "keyword" => $formData['s']
-    //     ])->findAll();
-    //     return $transactions;
-    // }
 }

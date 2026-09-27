@@ -24,13 +24,13 @@ class TransactionController
     {
         $this->validator_service->validateTransaction($_POST);
         $this->transaction_service->create($_POST);
-        rediretTo('/');
+        redirectTo('/');
     }
     public function editView(array $params)
     {
-        $transaction = $this->transaction_service->getTransaction($params['transaction']);
+        $transaction = $this->transaction_service->getUserTransaction($params['transaction']);
         if (!$transaction) {
-            rediretTo('/');
+            redirectTo('/');
         }
         echo $this->view->render("transactions/update.php", [
             'transaction' => $transaction
@@ -41,20 +41,17 @@ class TransactionController
 
     public function update(array $params)
     {
-        $transaction = $this->transaction_service->getTransaction($params['transaction']);
+        $transaction = $this->transaction_service->getUserTransaction($params['transaction']);
         if (!$transaction) {
-            rediretTo('/');
+            redirectTo('/');
         }
+        $this->validator_service->validateTransaction($_POST);
         $this->transaction_service->update($_POST, $transaction['id']);
-        rediretTo($_SERVER['HTTP_REFERER']);
+        redirectTo($_SERVER['HTTP_REFERER']);
     }
     public function delete(array $params)
     {
-        $transaction = $this->transaction_service->getTransaction($params['transaction']);
-        if (!$transaction) {
-            rediretTo('/');
-        }
         $this->transaction_service->delete((int)$params['transaction']);
-        rediretTo('/');
+        redirectTo('/');
     }
 }
