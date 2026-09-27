@@ -36,13 +36,15 @@ class TransactionController
             'transaction' => $transaction
         ]);
     }
+
+
+
     public function update(array $params)
     {
         $transaction = $this->transaction_service->getTransaction($params['transaction']);
         if (!$transaction) {
             rediretTo('/');
         }
-        $this->validator_service->validateTransaction($_POST);
         $this->transaction_service->update($_POST, $transaction['id']);
         rediretTo($_SERVER['HTTP_REFERER']);
     }

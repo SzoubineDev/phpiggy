@@ -31,14 +31,19 @@ class Router
     {
         $path = $this->normalizePath($path);
         $method = strtoupper($_POST['_METHOD'] ?? $method);
+
         foreach ($this->routes as $route) {
             if (!preg_match("#^{$route["regexPath"]}$#", $path, $paramValues) || $route["method"] !== $method) {
                 continue;
             }
+
             array_shift($paramValues);
             preg_match_all("#{([^/]+)}#", $route['path'], $paramKeys);
+
             $paramKeys = $paramKeys[1];
+
             $params = array_combine($paramKeys, $paramValues);
+
             [$class, $function] = $route['controller'];
             $controllerInstance = $container ? $container->resolve($class) : new $class;
             $action = fn() => $controllerInstance->$function($params);

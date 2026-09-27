@@ -42,7 +42,8 @@ class TransactionService
     }
     public function getTransaction(string $id)
     {
-        $transaction = $this->db->query("SELECT *,DATE_FORMAT(date, '%Y-%m-%d') as formatted_date FROM transactions WHERE id = :id AND user_id = :user_id", [
+        $transaction = $this->db->query("SELECT *,DATE_FORMAT(date, '%Y-%m-%d') as formatted_date
+         FROM transactions WHERE id = :id AND user_id = :user_id", [
             'id' => $id,
             'user_id' => $_SESSION['user']
         ])->find();
@@ -51,9 +52,8 @@ class TransactionService
     public function update(array $formData, int $id)
     {
         $formatted_date = "{$formData['date']} 00:00:00";
-        $this->db->query("UPDATE transactions
-         SET description = :description, amount = :amount ,
-          date = :date WHERE user_id = :user_id AND id = :id", [
+        $this->db->query("UPDATE transactions 
+        SET description = :description,amount = :amount,date = :date WHERE id =:id AND user_id=:user_id ", [
             'description' => $formData['description'],
             'amount' => $formData['amount'],
             'date' => $formatted_date,
