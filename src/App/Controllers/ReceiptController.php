@@ -35,5 +35,15 @@ class ReceiptController
         }
         $receiptFile = $_FILES['receipt'] ?? null;
         $this->receipt_service->validateFile($receiptFile);
+        $this->receipt_service->upload($receiptFile, $transaction['id']);
+        redirectTo('/');
+    }
+    public function delete()
+    {
+        dd($params);
+    }
+    public function download(array $params)
+    {
+        dd($params);
     }
 }
