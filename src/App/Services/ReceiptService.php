@@ -18,10 +18,10 @@ class ReceiptService
                 'receipt' => ["Faild to upload file!"]
             ]);
         }
-        $maxFileSizeMb = 3;
-        if ($file['size'] > ($maxFileSizeMb * 1024 * 1024)) {
+        $maxFileSizeMb = 3 * 1024 * 1024;
+        if ($file['size'] > ($maxFileSizeMb)) {
             throw new ValidationException([
-                'receipt' => ["File size is large, File should be less then  {$maxFileSizeMb} MB"]
+                'receipt' => ["File size is large"]
             ]);
         }
         $originalFileName = $file['name'];
@@ -30,6 +30,7 @@ class ReceiptService
                 'receipt' => ['invalid filename']
             ]);
         }
+
         $clientMimeType = $file['type'];
         $allowedMimeTypes = ['image/png', 'image/jpeg', 'application/pdf'];
         if (!in_array($clientMimeType, $allowedMimeTypes)) {
@@ -50,8 +51,33 @@ class ReceiptService
         VALUES (:transaction_id,:original_filename,:storage_filename,:media_type)", [
             'transaction_id' => $transaction_id,
             'original_filename' => $file['name'],
-            'storage_filename' => $uploadPath,
+            'storage_filename' => $newFileName,
             'media_type' => $file['type']
         ]);
+    }
+    public function getReceipt(string $id)
+    {
+        $receipt = $this->db->query("SELECT * FROM receipts WHERE id = :id", [
+            'id' => $id
+        ])->find();
+        return $receipt;
+    }
+    public function read(array $receipt)
+    {
+        $filePath = Paths::STORAGE_UPLOADS . '/' . $receipt['storage_filename'];
+
+        if (!file_exists($filePath)) {
+            redirectTo('/');
+        }
+
+        header("Content-Disposition: inline;filename={$receipt['original_filename']}");
+
+        header("Content-Type: {$receipt['media_type']}");
+
+        readfile($filePath);
+    }
+
+    public function delete(array $receipt) {
+        
     }
 }
