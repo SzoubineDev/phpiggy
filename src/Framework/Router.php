@@ -37,6 +37,7 @@ class Router
                 continue;
             }
 
+
             array_shift($paramValues);
             preg_match_all("#{([^/]+)}#", $route['path'], $paramKeys);
 

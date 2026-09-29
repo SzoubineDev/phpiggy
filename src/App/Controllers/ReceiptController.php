@@ -68,5 +68,6 @@ class ReceiptController
             redirectTo('/');
         }
         $this->receipt_service->delete($receipt);
+        redirectTo('/');
     }
 }
