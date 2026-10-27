@@ -1,10 +1,10 @@
 <?php include $this->resolve("partials/_header.php"); ?>
 <!-- Start Main Content Area -->
-<section class="container mx-auto mt-12 p-4 bg-white shadow-md border border-gray-200 rounded">
-    <div class="flex items-center justify-between border-b border-gray-200 pb-4">
-        <h4 class="font-medium">Transaction List</h4>
+<section class="container mx-auto mt-8 sm:mt-12 p-4 sm:p-6 bg-white shadow-md border border-gray-200 rounded-lg tx-container">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-gray-200 pb-4">
+        <h4 class="text-lg font-semibold text-gray-900">Transaction List</h4>
         <div class="flex space-x-4">
-            <a href="/transaction" class="flex items-center p-2 bg-sky-50 text-xs text-sky-900 hover:bg-sky-500 hover:text-white transition rounded">
+            <a href="/transaction" class="inline-flex items-center gap-1.5 px-3 py-2 bg-sky-50 text-xs font-medium text-sky-900 hover:bg-sky-500 hover:text-white transition rounded-md">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -22,8 +22,97 @@
             </button>
         </div>
     </form>
-    <!-- Transaction List -->
-    <table class="table-auto min-w-full divide-y divide-gray-300 mt-6">
+    <!-- Transaction List: Cards on mobile, table on >=768px -->
+    <div class="mt-6 tx-cards" aria-label="Transactions">
+        <?php if (count($transactions) === 0) : ?>
+            <div class="tx-empty">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h11.25M8.25 12h11.25M8.25 17.25h11.25M4.5 6.75h.008v.008H4.5v-.008zm0 5.25h.008v.008H4.5V12zm0 5.25h.008v.008H4.5v-.008z" />
+                </svg>
+                <p>No transactions found<?php echo !empty($searchTerm) ? ' for "' . e($searchTerm) . '"' : ''; ?>.</p>
+            </div>
+        <?php endif; ?>
+        <?php foreach ($transactions as $transaction) : ?>
+            <article class="tx-card">
+                <div class="tx-card-top">
+                    <h5 class="tx-card-title"><?php echo e($transaction['description']); ?></h5>
+                    <span class="tx-card-amount"><?php echo e($transaction['amount']); ?></span>
+                </div>
+                <div class="tx-card-meta">
+                    <span class="tx-card-date">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                        </svg>
+                        <?php echo e($transaction['formatted_date']); ?>
+                    </span>
+                    <span class="tx-card-receipts-label">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4.5h6M7.5 6h9a2.25 2.25 0 012.25 2.25v13.5L12 18l-6.75 3.75V8.25A2.25 2.25 0 017.5 6z" />
+                        </svg>
+                        Receipt<?php echo count($transaction['receipts']) === 1 ? '' : 's'; ?>
+                    </span>
+                </div>
+                <!-- Receipt chips -->
+                <?php if (count($transaction['receipts']) > 0) : ?>
+                    <div class="tx-card-receipts">
+                        <?php foreach ($transaction['receipts'] as $receipt): ?>
+                            <div class="tx-receipt-chip">
+                                <a href="/transaction/<?php echo e($transaction['id']); ?>/receipt/<?php echo e($receipt['id']); ?>" class="tx-receipt-link">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="rgb(109 40 217)" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25M9 16.5v.75m3-3v3M15 12v5.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                    </svg>
+                                    View receipt
+                                </a>
+                                <form action="/transaction/<?php echo e($transaction['id']); ?>/receipt/<?php echo e($receipt['id']); ?>" method="POST">
+                                    <?php include $this->resolve("partials/_csrf.php"); ?>
+                                    <input type="hidden" name="_METHOD" value="DELETE" />
+                                    <button type="submit" class="tx-receipt-remove" aria-label="Remove receipt">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="rgb(239 68 68)" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-5 h-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else : ?>
+                    <p class="tx-card-no-receipts">No receipts attached</p>
+                <?php endif; ?>
+                <!-- Actions -->
+                <div class="tx-card-actions">
+                    <a href="/transaction/<?php echo e($transaction['id']); ?>/receipt" class="tx-action tx-action-amber">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25H15M9 12l3 3m0 0l3-3m-3 3V2.25" />
+                        </svg>
+                        Add Receipt
+                    </a>
+                    <a href="/transaction/<?php echo e($transaction['id']); ?>" class="tx-action tx-action-emerald">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                        </svg>
+                        Edit
+                    </a>
+                    <form action="/transaction/<?php echo e($transaction['id']); ?>" method="POST">
+                        <input type="hidden" name="_METHOD" value="DELETE" id="">
+                        <?php include $this->resolve('partials/_csrf.php'); ?>
+                        <button type="submit" class="tx-action tx-action-red">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                            </svg>
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </article>
+        <?php endforeach; ?>
+    </div>
+
+    <table class="table-auto min-w-full divide-y divide-gray-300 mt-6 tx-table">
+        <?php if (count($transactions) === 0) : ?>
+            <caption class="tx-empty tx-empty-desktop">
+                <p>No transactions found<?php echo !empty($searchTerm) ? ' for "' . e($searchTerm) . '"' : ''; ?>.</p>
+            </caption>
+        <?php endif; ?>
         <thead class="bg-gray-50">
             <tr>
                 <th class="p-4 text-left text-sm font-semibold text-gray-900">
@@ -38,16 +127,16 @@
                 <th class="p-4 text-left text-sm font-semibold text-gray-900">
                     Date
                 </th>
-                <th>Actions</th>
+                <th class="text-center text-sm font-semibold text-gray-900">Actions</th>
             </tr>
         </thead>
         <!-- Transaction Table Body -->
         <tbody class="divide-y divide-gray-200 bg-white">
             <?php foreach ($transactions as $transaction) : ?>
 
-                <tr>
+                <tr class="hover:bg-gray-50 transition">
                     <!-- Description -->
-                    <td class="p-4 text-sm text-gray-600"><?php echo e($transaction['description']); ?></td>
+                    <td class="p-4 text-sm font-medium text-gray-900"><?php echo e($transaction['description']); ?></td>
                     <!-- Amount -->
                     <td class="p-4 text-sm text-gray-600"><?php echo e($transaction['amount']); ?></td>
                     <!-- Receipt List -->
@@ -75,26 +164,28 @@
                     <!-- Date -->
                     <td class="p-4 text-sm text-gray-600"><?php echo e($transaction['formatted_date']); ?></td>
                     <!-- Actions -->
-                    <td class="p-4 text-sm text-gray-600 flex justify-center space-x-2">
-                        <a href="/transaction/<?php echo e($transaction['id']); ?>/receipt" class="p-2 bg-amber-50 text-xs text-amber-900 hover:bg-amber-500 hover:text-white transition rounded">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25H15M9 12l3 3m0 0l3-3m-3 3V2.25" />
-                            </svg>
-                        </a>
-                        <a href="/transaction/<?php echo e($transaction['id']); ?>" class="p-2 bg-emerald-50 text-xs text-emerald-900 hover:bg-emerald-500 hover:text-white transition rounded">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                            </svg>
-                        </a>
-                        <form action="/transaction/<?php echo e($transaction['id']); ?>" method="POST">
-                            <input type="hidden" name="_METHOD" value="DELETE" id="">
-                            <?php include $this->resolve('partials/_csrf.php'); ?>
-                            <button type="submit" class="p-2 bg-red-50 text-xs text-red-900 hover:bg-red-500 hover:text-white transition rounded">
+                    <td class="p-4 text-sm text-gray-600">
+                        <div class="flex justify-center items-center space-x-2">
+                            <a href="/transaction/<?php echo e($transaction['id']); ?>/receipt" title="Add receipt" class="p-2 bg-amber-50 text-xs text-amber-900 hover:bg-amber-500 hover:text-white transition rounded">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 00-2.25 2.25v9a2.25 2.25 0 002.25 2.25h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25H15M9 12l3 3m0 0l3-3m-3 3V2.25" />
                                 </svg>
-                            </button>
-                        </form>
+                            </a>
+                            <a href="/transaction/<?php echo e($transaction['id']); ?>" title="Edit transaction" class="p-2 bg-emerald-50 text-xs text-emerald-900 hover:bg-emerald-500 hover:text-white transition rounded">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                </svg>
+                            </a>
+                            <form action="/transaction/<?php echo e($transaction['id']); ?>" method="POST">
+                                <input type="hidden" name="_METHOD" value="DELETE" id="">
+                                <?php include $this->resolve('partials/_csrf.php'); ?>
+                                <button type="submit" title="Delete transaction" class="p-2 bg-red-50 text-xs text-red-900 hover:bg-red-500 hover:text-white transition rounded">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             <?php endforeach; ?>
