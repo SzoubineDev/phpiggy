@@ -24,7 +24,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: 21
-          server-dir: /htdocs/
+          server-dir: /trackmymoney.my-board.org/htdocs
           exclude: |
             **/.git*
             **/.git*/**
