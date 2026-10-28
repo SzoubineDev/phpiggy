@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoubine Soulaimane · Portfolio</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#2563eb', // simple blue accent
+                        surface: '#f8fafc',
+                        border: '#e2e8f0',
+                        muted: '#64748b',
+                        dark: '#1e293b',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+
+    <!-- Inter font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: #1e293b;
+            background: #ffffff;
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Simple underline hover for nav links */
+        .nav-link {
+            position: relative;
+            text-decoration: none;
+            color: #475569;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #1e293b;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #2563eb;
+            transition: width 0.2s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        /* Subtle card hover */
+        .card-hover {
+            transition: all 0.2s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            border-color: #cbd5e1;
+        }
+        /* Fade in on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Section divider dot */
+        .section-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #2563eb;
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-800">
+
+    <!-- ===== HEADER / NAV (with Download CV) ===== -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <nav class="max-w-5xl mx-auto px-5 py-4 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="text-xl font-bold text-slate-900 tracking-tight">
+                Zoubine<span class="text-accent">.</span>
+            </a>
+
+            <!-- Navigation + CV (desktop) -->
+            <div class="hidden sm:flex items-center gap-6">
+                <ul class="flex items-center gap-8 text-sm font-medium">
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <!-- Download CV button -->
+                <a href="#" download="Zoubine_Soulaimane_CV.pdf"
+                class="inline-flex items-center gap-1.5 text-sm font-medium text-accent border border-accent px-4 py-2 rounded-lg hover:bg-accent hover:text-white transition-colors whitespace-nowrap">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                CV
+            </a>
+        </div>
+
+        <!-- Mobile: compact buttons -->
+        <div class="flex items-center gap-3 sm:hidden">
+            <a href="#" download="Zoubine_Soulaimane_CV.pdf"
+            class="text-sm font-medium text-accent border border-accent px-3 py-1.5 rounded-lg flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            CV
+        </a>
+        <a href="#contact"
+        class="text-sm font-medium text-white bg-accent px-4 py-1.5 rounded-lg hover:bg-blue-700 transition-colors">
+        Contact
+    </a>
+</div>
+</nav>
+</header>
+
+<main class="max-w-5xl mx-auto px-5">
+
+    <!-- ===== HERO ===== -->
+    <section class="pt-20 pb-14 md:pt-28 md:pb-20 fade-in">
+        <p class="text-sm font-medium text-accent tracking-wide uppercase mb-3">Student · Developer · Builder</p>
+        <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
+            Zoubine<br class="sm:hidden"> Soulaimane
+        </h1>
+        <p class="text-lg md:text-xl text-muted max-w-xl mb-8 leading-relaxed">
+            Computer engineering student crafting fast, secure digital experiences.
+            Based in Morocco — open to the world.
+        </p>
+        <div class="flex flex-wrap gap-3">
+            <a href="#projects"
+            class="inline-block bg-accent text-white font-medium text-sm px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+            View Projects
+        </a>
+        <a href="#contact"
+        class="inline-block border border-slate-300 text-slate-700 font-medium text-sm px-6 py-3 rounded-lg hover:border-accent hover:text-accent transition-colors">
+        Get in Touch
+    </a>
+    <!-- Direct CV download also in hero for quick access -->
+    <a href="#" download="Zoubine_Soulaimane_CV.pdf"
+    class="inline-flex items-center gap-2 border border-accent text-accent font-medium text-sm px-6 py-3 rounded-lg hover:bg-accent hover:text-white transition-colors">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    </svg>
+    Download CV
+</a>
+</div>
+<!-- Quick stats -->
+<div class="flex flex-wrap gap-6 mt-10 pt-8 border-t border-slate-200 text-sm text-muted">
+    <div><span class="font-semibold text-slate-700">Focus:</span> Dev · Cyber · AI</div>
+    <div><span class="font-semibold text-slate-700">Leadership:</span> VP · Great Debaters</div>
+    <div><span class="font-semibold text-slate-700">Languages:</span> EN · FR · AR</div>
+</div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="py-14 md:py-20 fade-in">
+    <div class="flex items-center gap-2 mb-6">
+        <span class="section-dot"></span>
+        <span class="text-xs font-semibold text-accent uppercase tracking-widest">About</span>
+    </div>
+    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-8">Who I am</h2>
+    <div class="grid md:grid-cols-2 gap-10">
+        <div class="text-muted leading-relaxed space-y-4">
+            <p>
+                I'm a <span class="font-medium text-slate-700">computer engineering student</span> from Morocco,
+                deeply into development, cybersecurity, and AI. I build things that are both functional and
+                well-crafted.
+            </p>
+            <p>
+                As <span class="font-medium text-slate-700">Vice President of the Great Debaters Club</span>,
+                I lead teams, organize events, and thrive in public speaking — bridging tech and people.
+            </p>
+            <p>
+                Currently working with: <span class="font-medium text-slate-700">HTML, CSS, JavaScript, SQL, Java,
+                PHP</span> + networking & security fundamentals.
+            </p>
+            <div class="inline-block bg-slate-100 border border-slate-200 px-4 py-2 rounded-full text-sm font-medium text-slate-600 mt-2">
+                🗣️ VP · Great Debaters Club
+            </div>
+        </div>
+        <!-- Simple info card -->
+        <div class="bg-surface border border-slate-200 rounded-xl p-6 text-sm text-slate-600 space-y-2 font-mono">
+            <p><span class="text-accent font-semibold">Name:</span> Zoubine Soulaimane</p>
+            <p><span class="text-accent font-semibold">Role:</span> Student & Builder</p>
+            <p><span class="text-accent font-semibold">Leadership:</span> VP Great Debaters</p>
+            <p><span class="text-accent font-semibold">Interests:</span> Dev, Cyber, AI</p>
+            <p><span class="text-accent font-semibold">Stack:</span> JS, Java, PHP, SQL</p>
+            <p class="pt-3 border-t border-slate-200 mt-3">
+                <span class="text-accent font-semibold">Location:</span> Morocco
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section id="skills" class="py-14 md:py-20 fade-in">
+    <div class="flex items-center gap-2 mb-6">
+        <span class="section-dot"></span>
+        <span class="text-xs font-semibold text-accent uppercase tracking-widest">Skills</span>
+    </div>
+    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-8">Stack & Tools</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Frontend -->
+        <div class="border border-slate-200 rounded-xl p-5 card-hover bg-white">
+            <p class="text-xs font-semibold text-accent uppercase tracking-wider mb-3">Frontend</p>
+            <h3 class="text-lg font-semibold text-slate-800 mb-3">UI / UX</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">HTML5</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">CSS3</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">JavaScript</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">Responsive</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">Tailwind</span>
+            </div>
+        </div>
+        <!-- Backend -->
+        <div class="border border-slate-200 rounded-xl p-5 card-hover bg-white">
+            <p class="text-xs font-semibold text-accent uppercase tracking-wider mb-3">Backend</p>
+            <h3 class="text-lg font-semibold text-slate-800 mb-3">Server Side</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">Java</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">PHP</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">SQL</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">Node.js</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">REST</span>
+            </div>
+        </div>
+        <!-- Cybersecurity -->
+        <div class="border border-slate-200 rounded-xl p-5 card-hover bg-white">
+            <p class="text-xs font-semibold text-accent uppercase tracking-wider mb-3">Cybersecurity</p>
+            <h3 class="text-lg font-semibold text-slate-800 mb-3">Security</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">Networking</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">OWASP</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">Kali</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">Encryption</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">Wireshark</span>
+            </div>
+        </div>
+        <!-- AI & Data -->
+        <div class="border border-slate-200 rounded-xl p-5 card-hover bg-white">
+            <p class="text-xs font-semibold text-accent uppercase tracking-wider mb-3">AI & Data</p>
+            <h3 class="text-lg font-semibold text-slate-800 mb-3">AI / ML</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">Python</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">LLMs</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">Prompt Eng</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">Agents</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">Pandas</span>
+            </div>
+        </div>
+        <!-- Databases -->
+        <div class="border border-slate-200 rounded-xl p-5 card-hover bg-white">
+            <p class="text-xs font-semibold text-accent uppercase tracking-wider mb-3">Databases</p>
+            <h3 class="text-lg font-semibold text-slate-800 mb-3">Data</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">MySQL</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">PostgreSQL</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">MongoDB</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">IndexedDB</span>
+            </div>
+        </div>
+        <!-- Soft Skills -->
+        <div class="border border-slate-200 rounded-xl p-5 card-hover bg-white">
+            <p class="text-xs font-semibold text-accent uppercase tracking-wider mb-3">Soft Skills</p>
+            <h3 class="text-lg font-semibold text-slate-800 mb-3">Human</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">Leadership</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">Communication</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">Debate</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">Teamwork</span>
+                <span class="text-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full text-slate-600">EN/FR/AR</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects" class="py-14 md:py-20 fade-in">
+    <div class="flex items-center gap-2 mb-6">
+        <span class="section-dot"></span>
+        <span class="text-xs font-semibold text-accent uppercase tracking-widest">Projects</span>
+    </div>
+    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-8">Selected Work</h2>
+    <div class="grid sm:grid-cols-2 gap-5">
+        <!-- Project 1 -->
+        <a href="https://zoudev-budgettracker.netlify.app/" target="_blank" rel="noopener"
+        class="block border border-slate-200 rounded-xl p-6 card-hover bg-white group">
+        <p class="text-xs text-accent font-semibold mb-2">001</p>
+        <h3 class="text-xl font-semibold text-slate-800 mb-2 group-hover:text-accent transition-colors">
+            Budget Tracker
+        </h3>
+        <p class="text-sm text-muted mb-4">Personal finance manager with expense tracking and savings goals.</p>
+        <div class="flex flex-wrap gap-2">
+            <span class="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-500">JS</span>
+            <span class="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-500">LocalStorage</span>
+            <span class="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-500">CSS</span>
+        </div>
+    </a>
+    <!-- Project 2 -->
+    <a href="https://the-great-debater.netlify.app/" target="_blank" rel="noopener"
+    class="block border border-slate-200 rounded-xl p-6 card-hover bg-white group">
+    <p class="text-xs text-accent font-semibold mb-2">002</p>
+    <h3 class="text-xl font-semibold text-slate-800 mb-2 group-hover:text-accent transition-colors">
+        TGD Club
+    </h3>
+    <p class="text-sm text-muted mb-4">The Great Debaters club website — Errachidia.</p>
+    <div class="flex flex-wrap gap-2">
+        <span class="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-500">JS</span>
+        <span class="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-500">Tailwind</span>
+        <span class="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-500">CSS</span>
+    </div>
+</a>
+<!-- Project 3 -->
+<a href="https://zouquiz.netlify.app/" target="_blank" rel="noopener"
+class="block border border-slate-200 rounded-xl p-6 card-hover bg-white group">
+<p class="text-xs text-accent font-semibold mb-2">003</p>
+<h3 class="text-xl font-semibold text-slate-800 mb-2 group-hover:text-accent transition-colors">
+    ZouQuiz
+</h3>
+<p class="text-sm text-muted mb-4">Interactive quiz with dynamic scoring, timer, and categories.</p>
+<div class="flex flex-wrap gap-2">
+    <span class="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-500">HTML/CSS</span>
+    <span class="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-500">JavaScript</span>
+    <span class="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-500">API</span>
+</div>
+</a>
+<!-- Project 4 - Todo App -->
+<a href="https://zou-todo-app.up.railway.app" target="_blank" rel="noopener"
+class="block border border-slate-200 rounded-xl p-6 card-hover bg-white group">
+<p class="text-xs text-accent font-semibold mb-2">004</p>
+<h3 class="text-xl font-semibold text-slate-800 mb-2 group-hover:text-accent transition-colors">
+    Todo App
+</h3>
+<p class="text-sm text-muted mb-4">Full-stack task manager deployed on Railway.</p>
+<div class="flex flex-wrap gap-2">
+    <span class="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-500">Node.js</span>
+    <span class="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-500">Express</span>
+    <span class="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-500">Railway</span>
+</div>
+</a>
+</div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="py-14 md:py-20 fade-in">
+    <div class="flex items-center gap-2 mb-6">
+        <span class="section-dot"></span>
+        <span class="text-xs font-semibold text-accent uppercase tracking-widest">Contact</span>
+    </div>
+    <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">
+        Let's build<br><span class="text-accent">together.</span>
+    </h2>
+    <p class="text-muted mb-10 max-w-md">
+        Open for collaborations, internships, and creative projects.
+    </p>
+    <div class="grid sm:grid-cols-2 gap-5 max-w-2xl">
+        <!-- Email -->
+        <a href="mailto:zoubinesoulaimane@gmail.com"
+        class="flex items-center justify-between border border-slate-200 rounded-xl px-5 py-4 card-hover bg-white group">
+        <div>
+            <p class="text-xs text-muted uppercase tracking-wider mb-1">Email</p>
+            <p class="text-sm font-medium text-slate-700">zoubinesoulaimane@gmail.com</p>
+        </div>
+        <span class="text-accent opacity-0 group-hover:opacity-100 transition-opacity text-lg">→</span>
+    </a>
+    <!-- GitHub -->
+    <a href="https://github.com/SzoubineDev" target="_blank" rel="noopener"
+    class="flex items-center justify-between border border-slate-200 rounded-xl px-5 py-4 card-hover bg-white group">
+    <div>
+        <p class="text-xs text-muted uppercase tracking-wider mb-1">GitHub</p>
+        <p class="text-sm font-medium text-slate-700">/SzoubineDev</p>
+    </div>
+    <span class="text-accent opacity-0 group-hover:opacity-100 transition-opacity text-lg">→</span>
+</a>
+<!-- LinkedIn -->
+<a href="https://www.linkedin.com/in/soulaimane-zoubine/" target="_blank" rel="noopener"
+class="flex items-center justify-between border border-slate-200 rounded-xl px-5 py-4 card-hover bg-white group">
+<div>
+    <p class="text-xs text-muted uppercase tracking-wider mb-1">LinkedIn</p>
+    <p class="text-sm font-medium text-slate-700">/in/soulaimane-zoubine</p>
+</div>
+<span class="text-accent opacity-0 group-hover:opacity-100 transition-opacity text-lg">→</span>
+</a>
+<!-- Portfolio -->
+<a href="#"
+class="flex items-center justify-between border border-slate-200 rounded-xl px-5 py-4 card-hover bg-white group">
+<div>
+    <p class="text-xs text-muted uppercase tracking-wider mb-1">Portfolio</p>
+    <p class="text-sm font-medium text-slate-700">zoubine.dev</p>
+</div>
+<span class="text-accent opacity-0 group-hover:opacity-100 transition-opacity text-lg">→</span>
+</a>
+</div>
+</section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="border-t border-slate-200 mt-10">
+    <div class="max-w-5xl mx-auto px-5 py-6 flex flex-col sm:flex-row items-center justify-between text-sm text-muted gap-2">
+        <p>© 2025 Zoubine Soulaimane — built for speed & creativity</p>
+        <p>Morocco · <span class="text-accent font-medium">dev & sec</span> · VP Great Debaters</p>
+    </div>
+</footer>
+
+<!-- ===== SIMPLE SCROLL REVEAL ===== -->
+<script>
+    (function() {
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        fadeElements.forEach(el => observer.observe(el));
+
+        // Smooth scroll for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#' || href === '') return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    })();
+</script>
+</body>
+</html>
