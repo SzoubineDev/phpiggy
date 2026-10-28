@@ -29,6 +29,7 @@
 
 <body class="app-body flex flex-col min-h-screen bg-indigo-50 font-sans">
     <!-- Start Header -->
+
     <header class="site-header bg-indigo-900 text-white shadow-md">
         <nav class="container mx-auto px-4 flex items-center justify-between site-header__nav" aria-label="Global">
             <a href="/" class="site-header__brand flex items-center gap-2 text-white hover:text-white">
@@ -39,6 +40,11 @@
                 </span>
                 <span class="site-header__wordmark text-xl font-bold">PHPiggy</span>
             </a>
+
+    <header class="bg-indigo-900">
+        <nav class="mx-auto flex container items-center justify-between py-4" aria-label="Global">
+            <a href="/" class="-m-1.5 p-1.5 text-white text-2xl font-bold">ZouTracks</a>
+
             <!-- Navigation Links -->
             <div class="site-header__links flex items-center">
                 <a href="/about" class="site-header__link text-gray-300 hover:text-white transition">About</a>
