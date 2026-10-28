@@ -1,0 +1,207 @@
+/* ============================================================
+   PHPiggy — DESKTOP ONLY stylesheet (Tailwind v4 entry)
+   Loaded by the browser exclusively at 768px and above via:
+     <link rel="stylesheet" media="(min-width: 768px)" ...>
+
+   Contains ONLY desktop styling:
+   - enhanced transactions TABLE layout (cards are not rendered
+     on desktop at all — markup is separated server-side)
+   - hover states, wider spacing, refined typography
+   Nothing in this file targets mobile; mobile rules live
+   exclusively in mobile.css. The two never mix.
+   ============================================================ */
+@import "tailwindcss/theme";
+@import "./theme.css";
+
+@source "../../src/App/views";
+
+/* ---------- Desktop table layout ---------- */
+.tx-table {
+    width: 100%;
+    min-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: auto;
+    margin-top: 1.5rem;
+}
+
+.tx-table thead tr {
+    border-bottom: 1px solid var(--color-gray-300);
+}
+
+.tx-th {
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-gray-700);
+    background-color: var(--color-gray-50);
+}
+
+.tx-th:first-child {
+    border-top-left-radius: 0.5rem;
+}
+
+.tx-th:last-child {
+    border-top-right-radius: 0.5rem;
+    text-align: center;
+}
+
+.tx-tr {
+    background-color: #fff;
+    border-bottom: 1px solid var(--color-gray-200);
+    transition: background-color 150ms ease, box-shadow 150ms ease;
+}
+
+.tx-tr:hover {
+    background-color: var(--color-gray-50);
+    box-shadow: inset 3px 0 0 0 var(--color-indigo-500);
+}
+
+.tx-td {
+    padding: 1rem;
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+    vertical-align: middle;
+}
+
+.tx-td--description {
+    font-weight: 500;
+    color: var(--color-gray-800);
+}
+
+.tx-td--amount {
+    font-weight: 600;
+    color: var(--color-indigo-700);
+    white-space: nowrap;
+}
+
+.tx-td--actions {
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Icon cluster for receipts in the table cell */
+.tx-receipts {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    align-items: center;
+}
+
+.tx-receipt {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 0;
+}
+
+.tx-receipt__icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    stroke: var(--color-violet-700);
+    transition: transform 150ms ease;
+}
+
+.tx-receipt:hover .tx-receipt__icon {
+    transform: translateY(-2px);
+}
+
+.tx-receipt__remove {
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    line-height: 0;
+    cursor: pointer;
+}
+
+.tx-receipt__remove svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: var(--color-red-500);
+    stroke: #fff;
+    stroke-width: 1.5;
+}
+
+/* Table action buttons */
+.tx-actions {
+    display: inline-flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border: 0;
+    border-radius: 0.375rem;
+    line-height: 0;
+    transition: background-color 150ms ease, color 150ms ease;
+}
+
+.action-btn svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.action-btn--amber {
+    background-color: var(--color-amber-50);
+    color: var(--color-amber-700);
+}
+
+.action-btn--amber:hover {
+    background-color: var(--color-amber-500);
+    color: #fff;
+}
+
+.action-btn--emerald {
+    background-color: var(--color-emerald-50);
+    color: var(--color-emerald-700);
+}
+
+.action-btn--emerald:hover {
+    background-color: var(--color-emerald-500);
+    color: #fff;
+}
+
+.action-btn--red {
+    background-color: var(--color-red-50);
+    color: var(--color-red-700);
+}
+
+.action-btn--red:hover {
+    background-color: var(--color-red-500);
+    color: #fff;
+}
+
+/* ---------- Desktop header refinements ---------- */
+.site-header__nav {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    gap: 2.5rem;
+}
+
+.site-header__links {
+    gap: 2.5rem;
+}
+
+/* ---------- Desktop page spacing ---------- */
+.page-section {
+    margin-top: 3rem;
+    padding: 1.25rem;
+}
+
+/* Wider table cells on large screens */
+@media (min-width: 1024px) {
+    .tx-th,
+    .tx-td {
+        padding: 1.25rem;
+    }
+}
