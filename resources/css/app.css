@@ -7,6 +7,7 @@
    mobile.css / desktop.css.
 
    Tailwind v4 scans the PHP views for utility classes and
+
    compiles ONLY what is used into this file.
    ============================================================ */
 @import "tailwindcss";
@@ -224,4 +225,36 @@
         width: 1.25rem;
         color: var(--color-gray-400);
     }
+}
+/* Remove browser default spacing and fill the viewport */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+html {
+    background: #eef2ff;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+#app,
+.app-body {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
 }
