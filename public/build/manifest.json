@@ -1,0 +1,17 @@
+{
+  "resources/css/app.css": {
+    "file": "app-BNeyaT1_.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/desktop.css": {
+    "file": "desktop-03jcsyHI.css",
+    "src": "resources/css/desktop.css",
+    "isEntry": true
+  },
+  "resources/css/mobile.css": {
+    "file": "mobile-CUHJQG7l.css",
+    "src": "resources/css/mobile.css",
+    "isEntry": true
+  }
+}

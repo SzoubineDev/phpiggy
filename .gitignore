@@ -1,4 +1,3 @@
-
 # Dependencies
 /node_modules/
 /vendor/
@@ -10,6 +9,7 @@
 
 # Vite production build
 /public/build/
+/public/hot
 
 # Logs
 *.log
