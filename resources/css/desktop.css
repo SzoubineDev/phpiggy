@@ -15,6 +15,124 @@
 
 @source "../../src/App/views";
 
+/* ---------- Desktop page shell ---------- */
+.page-section {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    border-radius: 1.25rem;
+    box-shadow: 0 10px 30px -12px rgb(15 23 42 / 0.18), 0 4px 10px -6px rgb(15 23 42 / 0.08);
+}
+
+/* ---------- Transaction list header ---------- */
+.tx-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.tx-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-gray-900);
+}
+
+.new-tx-btn {
+    min-height: 2.75rem;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9375rem;
+    transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+}
+
+.new-tx-btn:hover {
+    background-color: var(--color-sky-500);
+    color: #fff;
+    box-shadow: 0 8px 18px -8px rgb(2 132 199 / 0.5);
+}
+
+/* ---------- Search: inline field + button ---------- */
+.search-form {
+    margin-top: 1.25rem;
+}
+
+.search-form__field {
+    display: flex;
+    width: 100%;
+    max-width: 28rem;
+    border: 1px solid var(--color-gray-300);
+    border-radius: 0.625rem;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.search-form__field:focus-within {
+    border-color: var(--color-indigo-400);
+    box-shadow: 0 0 0 3px rgb(199 210 254 / 0.6);
+}
+
+.search-form__input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    border-radius: 0.625rem 0 0 0.625rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.9375rem;
+    color: var(--color-gray-900);
+}
+
+.search-form__submit {
+    flex-shrink: 0;
+    border: 0;
+    border-radius: 0 0.625rem 0.625rem 0;
+    background-color: var(--color-indigo-600);
+    color: #fff;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 150ms ease;
+}
+
+.search-form__submit:hover {
+    background-color: var(--color-indigo-500);
+}
+
+/* ---------- Summary strip: static row of stat tiles ---------- */
+.tx-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+.tx-summary__chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.625rem;
+    background-color: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 0.75rem;
+    padding: 0.625rem 1rem;
+}
+
+.tx-summary__label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-gray-500);
+}
+
+.tx-summary__value {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--color-indigo-700);
+}
+
 /* ---------- Desktop table layout ---------- */
 .tx-table {
     width: 100%;
@@ -181,6 +299,15 @@
     color: #fff;
 }
 
+/* ---------- Empty state ---------- */
+.tx-empty {
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    font-size: 0.9375rem;
+    color: var(--color-gray-500);
+}
+
 /* ---------- Desktop header refinements ---------- */
 .site-header__nav {
     padding-top: 1rem;
@@ -192,10 +319,32 @@
     gap: 2.5rem;
 }
 
-/* ---------- Desktop page spacing ---------- */
-.page-section {
-    margin-top: 3rem;
-    padding: 1.25rem;
+.site-header__link--cta {
+    transition: background-color 150ms ease, box-shadow 150ms ease;
+}
+
+.site-header__link--cta:hover {
+    box-shadow: 0 6px 16px -6px rgb(99 102 241 / 0.6);
+}
+
+/* ---------- Desktop pagination ---------- */
+.pagination {
+    margin-top: 2rem;
+}
+
+/* ---------- Desktop forms ---------- */
+.form-input,
+.form-select {
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.form-submit {
+    transition: background-color 150ms ease, box-shadow 150ms ease;
+}
+
+.form-submit:hover {
+    background-color: var(--color-indigo-500);
+    box-shadow: 0 10px 22px -10px rgb(79 70 229 / 0.5);
 }
 
 /* Wider table cells on large screens */
@@ -203,5 +352,21 @@
     .tx-th,
     .tx-td {
         padding: 1.25rem;
+    }
+
+    .page-section {
+        padding: 2.5rem;
+    }
+}
+
+/* ---------- Mobile-only helpers (never apply on desktop) ---------- */
+@media (max-width: 767.98px) {
+    .md\:hidden {
+        display: none !important;
+    }
+
+    .md\:table,
+    .md\:flex {
+        display: none !important;
     }
 }
