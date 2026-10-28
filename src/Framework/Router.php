@@ -56,6 +56,7 @@ class Router
             $action();
             return;
         }
+        
     }
     public function addMiddleware(string $middleware)
     {
