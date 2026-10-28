@@ -3,10 +3,13 @@
    Loaded by the browser exclusively below 768px via:
      <link rel="stylesheet" media="(max-width: 767.98px)" ...>
 
-   Contains ONLY mobile styling:
-   - transaction CARDS layout (the desktop table is not rendered
-     on mobile at all — markup is separated server-side)
-   - touch-friendly sizing, stacked full-width actions
+   Contains ONLY mobile styling — a redesigned, thumb-friendly
+   experience that works great on every phone size (320px up):
+   - compact sticky header + pill search bar
+   - transaction CARDS layout (the desktop table is never
+     rendered on mobile — markup is separated server-side)
+   - full-width touch forms & buttons (>=44px tap targets)
+   - safe-area insets for notched / gesture-nav phones
    Nothing in this file targets desktop; desktop rules live
    exclusively in desktop.css. The two never mix.
    ============================================================ */
@@ -15,12 +18,187 @@
 
 @source "../../src/App/views";
 
+/* ---------- Mobile page shell ---------- */
+.app-body {
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+}
+
+.page-section {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0.875rem;
+    border-radius: 1.125rem;
+}
+
+/* ---------- Mobile header: compact, sticky ---------- */
+.site-header__nav {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    gap: 0.75rem;
+}
+
+.site-header__wordmark {
+    font-size: 1.125rem;
+    letter-spacing: -0.01em;
+}
+
+.site-header__links {
+    gap: 0.625rem;
+    font-size: 0.875rem;
+}
+
+.site-header__link--cta {
+    padding: 0.5rem 0.875rem;
+    min-height: 2.5rem;
+}
+
+/* ---------- Transaction list header ---------- */
+.tx-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+}
+
+.tx-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-gray-900);
+}
+
+.new-tx-btn {
+    justify-content: center;
+    min-height: 2.875rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.9375rem;
+    box-shadow: 0 6px 14px -6px rgb(2 132 199 / 0.45);
+}
+
+/* ---------- Search: one big rounded pill, easy to tap ---------- */
+.search-form {
+    margin-top: 1rem;
+}
+
+.search-form__field {
+    border: 1px solid var(--color-gray-300);
+    border-radius: 9999px;
+    background-color: #fff;
+    padding: 0.25rem 0.25rem 0.25rem 1rem;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.search-form__input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    padding: 0.5rem 0;
+    font-size: 1rem; /* >=16px prevents iOS zoom-on-focus */
+    color: var(--color-gray-900);
+}
+
+.search-form__submit {
+    flex-shrink: 0;
+    min-height: 2.75rem;
+    padding: 0.5rem 1.125rem;
+    border: 0;
+    border-radius: 9999px;
+    background-color: var(--color-indigo-600);
+    color: #fff;
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+
+.search-form__submit:active {
+    background-color: var(--color-indigo-800);
+}
+
+/* ---------- Summary: bento grid of stat tiles ---------- */
+.tx-summary {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.625rem;
+    margin-top: 1rem;
+}
+
+@media (min-width: 380px) and (max-width: 767.98px) {
+    .tx-summary {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.tx-summary__tile {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    background-color: #fff;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 0.875rem;
+    padding: 0.625rem 0.75rem;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.tx-summary__icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.125rem;
+    height: 2.125rem;
+    border-radius: 0.625rem;
+}
+
+.tx-summary__icon svg {
+    width: 1.125rem;
+    height: 1.125rem;
+}
+
+.tx-summary__icon--indigo {
+    background-color: var(--color-indigo-50);
+    color: var(--color-indigo-600);
+}
+
+.tx-summary__icon--sky {
+    background-color: var(--color-sky-50);
+    color: var(--color-sky-700);
+}
+
+.tx-summary__icon--violet {
+    background-color: var(--color-violet-50);
+    color: var(--color-violet-600);
+}
+
+.tx-summary__meta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.tx-summary__label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-gray-500);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tx-summary__value {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--color-gray-900);
+    line-height: 1.25;
+}
+
 /* ---------- Mobile card layout ---------- */
 .tx-cards {
     display: flex;
     flex-direction: column;
-    gap: 0.875rem;
-    margin-top: 1.5rem;
+    gap: 0.75rem;
+    margin-top: 1rem;
 }
 
 .tx-card {
@@ -28,10 +206,37 @@
     display: block;
     background-color: #fff;
     border: 1px solid var(--color-gray-200);
-    border-left: 4px solid var(--color-indigo-500);
-    border-radius: 0.75rem;
+    border-radius: 1.25rem;
     padding: 1rem;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.08);
+    box-shadow: 0 4px 16px -8px rgb(15 23 42 / 0.14);
+    overflow-wrap: break-word;
+}
+
+/* Newest transaction gets an accent ribbon + soft indigo wash */
+.tx-card--first {
+    border-color: var(--color-indigo-200);
+    background: linear-gradient(180deg, var(--color-indigo-50) 0%, #fff 4.5rem);
+}
+
+.tx-card--first::before {
+    content: "Latest";
+    position: absolute;
+    top: 0;
+    right: 1.25rem;
+    transform: translateY(-50%);
+    background-color: var(--color-indigo-600);
+    color: #fff;
+    font-size: 0.625rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.1875rem 0.625rem;
+    border-radius: 9999px;
+    box-shadow: 0 2px 6px -1px rgb(79 70 229 / 0.5);
+}
+
+.tx-card:active {
+    transform: scale(0.99);
 }
 
 .tx-card__head {
@@ -39,40 +244,41 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: 0.75rem;
+    /* keep clear of the "Latest" ribbon on the first card */
+    padding-top: 0.125rem;
 }
 
 .tx-card__description {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 1.0625rem;
+    font-weight: 700;
     color: var(--color-gray-900);
-    line-height: 1.35;
+    line-height: 1.3;
     word-break: break-word;
 }
 
 .tx-card__amount {
     flex-shrink: 0;
     display: inline-block;
-    background-color: var(--color-indigo-50);
-    color: var(--color-indigo-700);
-    font-weight: 700;
-    font-size: 0.9375rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
+    background-color: var(--color-indigo-100);
+    color: var(--color-indigo-800);
+    font-weight: 800;
+    font-size: 1.0625rem;
+    padding: 0.3125rem 0.75rem;
+    border-radius: 0.75rem;
+    letter-spacing: -0.01em;
 }
 
 .tx-card__date {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.375rem;
     margin-top: 0.5rem;
-    font-size: 0.8125rem;
-    color: var(--color-gray-500);
-}
-
-.tx-card__date-icon {
-    width: 1rem;
-    height: 1rem;
-    color: var(--color-gray-400);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-gray-600);
+    background-color: var(--color-gray-100);
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    width: fit-content;
 }
 
 /* Receipts row inside a card */
@@ -93,24 +299,38 @@
     border: 1px solid var(--color-violet-100);
     color: var(--color-violet-700);
     font-size: 0.8125rem;
-    font-weight: 500;
-    padding: 0.375rem 0.625rem;
-    border-radius: 0.5rem;
+    font-weight: 600;
+    padding: 0.5rem 0.625rem;
+    border-radius: 0.625rem;
+}
+
+.receipt-item__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-height: 1.5rem;
 }
 
 .receipt-item__icon {
     width: 1rem;
     height: 1rem;
+    flex-shrink: 0;
 }
 
 .receipt-item__remove {
     position: absolute;
-    top: -0.5rem;
-    right: -0.5rem;
+    top: -0.625rem;
+    right: -0.625rem;
     display: inline-flex;
-    padding: 0;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.375rem;
     border: 0;
-    background: transparent;
+    border-radius: 9999px;
+    background: #fff;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 0.18);
     line-height: 0;
 }
 
@@ -128,11 +348,11 @@
     font-style: italic;
 }
 
-/* Card actions: full-width stacked buttons, 44px tap targets */
+/* Card actions: full-width stacked buttons, >=44px tap targets */
 .tx-card__actions {
     display: flex;
     gap: 0.5rem;
-    margin-top: 1rem;
+    margin-top: 0.875rem;
     padding-top: 0.75rem;
     border-top: 1px solid var(--color-gray-100);
 }
@@ -148,18 +368,23 @@
     align-items: center;
     justify-content: center;
     gap: 0.375rem;
-    min-height: 2.75rem;
-    padding: 0.5rem 0.75rem;
+    min-height: 2.875rem;
+    padding: 0.5rem 0.5rem;
     border: 0;
-    border-radius: 0.5rem;
+    border-radius: 0.75rem;
     font-size: 0.8125rem;
-    font-weight: 600;
+    font-weight: 700;
     width: 100%;
+}
+
+.tx-card__action:active {
+    filter: brightness(0.94);
 }
 
 .tx-card__action svg {
     width: 1.125rem;
     height: 1.125rem;
+    flex-shrink: 0;
 }
 
 .tx-card__action--amber {
@@ -177,41 +402,104 @@
     color: var(--color-red-700);
 }
 
-/* Stack action buttons vertically on very small screens */
-@media (max-width: 380px) {
+/* Stack action buttons vertically on very small screens (<360px) */
+@media (max-width: 359px) {
     .tx-card__actions {
         flex-direction: column;
     }
 }
 
-/* ---------- Mobile header refinements ---------- */
-.site-header__nav {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    gap: 0.75rem;
-}
-
-.site-header__wordmark {
-    font-size: 1.125rem;
-}
-
-.site-header__links {
-    gap: 0.75rem;
-    font-size: 0.875rem;
-}
-
-/* ---------- Mobile page spacing ---------- */
-.page-section {
+/* ---------- Empty state ---------- */
+.tx-empty {
     margin-top: 1.5rem;
-    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    font-size: 0.9375rem;
+    color: var(--color-gray-500);
 }
 
-.tx-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
+/* ---------- Mobile pagination: arrows only, big tap targets ---------- */
+.pagination {
+    margin-top: 1.25rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
 }
 
-.new-tx-btn {
-    padding: 0.625rem 0.875rem;
+.pagination__arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.75rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-gray-600);
+    background-color: #fff;
+    border: 1px solid var(--color-gray-200);
+}
+
+.pagination__arrow:active {
+    background-color: var(--color-gray-100);
+}
+
+.pagination__arrow svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: var(--color-indigo-500);
+}
+
+/* ---------- Mobile forms: comfortable full-width controls ---------- */
+.form-label {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    margin-bottom: 0.125rem;
+}
+
+.form-input,
+.form-select {
+    font-size: 1rem; /* >=16px prevents iOS zoom-on-focus */
+    min-height: 2.875rem;
+    border-radius: 0.75rem;
+}
+
+.form-submit {
+    min-height: 3rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    box-shadow: 0 8px 18px -8px rgb(79 70 229 / 0.55);
+}
+
+.form-submit:active {
+    background-color: var(--color-indigo-800);
+}
+
+.checkbox-row {
+    gap: 0.625rem;
+    font-size: 0.9375rem;
+}
+
+.checkbox-row input {
+    width: 1.375rem;
+    height: 1.375rem;
+    flex-shrink: 0;
+}
+
+.file-input {
+    font-size: 1rem;
+}
+
+.file-input::file-selector-button {
+    min-height: 2.75rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.75rem;
+    font-size: 0.9375rem;
+}
+
+/* ---------- Mobile footer: bottom-pinned with safe-area ---------- */
+.site-footer {
+    margin-top: 2rem;
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+    text-align: center;
+    font-size: 0.875rem;
 }
