@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ZouTracks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#312e81" />
+    <title>PHPiggy</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,7 +38,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.25M9 4.875c-.354-.167-.732-.28-1.125-.344m2.25-1.556A9.042 9.042 0 0112 2.25c4.97 0 9 3.03 9 6.75 0 1.825-.902 3.488-2.393 4.754M5.625 6.377A9.04 9.04 0 003 9c0 3.72 4.03 6.75 9 6.75.936 0 1.84-.112 2.695-.323" />
                     </svg>
                 </span>
-                <span class="site-header__wordmark text-xl md:text-2xl font-bold">PHPiggy</span>
+                <span class="site-header__wordmark text-xl font-bold">PHPiggy</span>
             </a>
 
     <header class="bg-indigo-900">
