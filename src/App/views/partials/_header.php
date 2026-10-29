@@ -27,30 +27,30 @@
     <link rel="stylesheet" href="<?= $assetUrl('resources/css/desktop.css') ?>" media="(min-width: 768px)" />
 </head>
 
-<body class="app-body flex flex-col min-h-screen bg-indigo-50 font-sans">
+<body class="app-body">
     <!-- Start Header -->
-    <header class="site-header bg-indigo-900 text-white shadow-md">
-        <nav class="container mx-auto px-4 flex items-center justify-between site-header__nav" aria-label="Global">
-            <a href="/" class="site-header__brand flex items-center text-white hover:text-white">
-                <span class="site-header__wordmark text-xl font-bold">PHPiggy</span>
+    <header class="site-header">
+        <nav class="layout site-header__nav" aria-label="Global">
+            <a href="/" class="site-header__brand">
+                <span class="site-header__wordmark">PHPiggy</span>
             </a>
             <!-- Navigation Links -->
-            <div class="site-header__links flex items-center">
-                <a href="/about" class="site-header__link text-gray-300 hover:text-white transition">About</a>
+            <div class="site-header__links">
+                <a href="/about" class="site-header__link">About</a>
                 <?php if (isset($_SESSION['user'])): ?>
-                    <a href="/logout" class="site-header__link site-header__link--cta inline-flex items-center gap-1.5 rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-500 transition">
+                    <a href="/logout" class="site-header__link site-header__link--cta">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                         </svg>
                         Logout
                     </a>
                 <?php else: ?>
-                    <a href="/login" class="site-header__link text-gray-300 hover:text-white transition">Login</a>
-                    <a href="/register" class="site-header__link site-header__link--cta inline-flex items-center rounded-full bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-500 transition">Register</a>
+                    <a href="/login" class="site-header__link">Login</a>
+                    <a href="/register" class="site-header__link site-header__link--cta">Register</a>
                 <?php endif; ?>
             </div>
         </nav>
     </header>
     <!-- End Header -->
 
-    <main class="app-main w-full">
+    <main class="app-main">

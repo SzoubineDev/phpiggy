@@ -1,7 +1,7 @@
 <?php include $this->resolve("partials/_header.php"); ?>
 
 <!-- Start Main Content Area -->
-<section class="container mx-auto page-section panel text-center">
+<section class="layout page-section panel text-center">
     <h1 class="font-black text-5xl sm:text-6xl md:text-9xl text-indigo-900">404</h1>
     <p class="my-6 font-bold text-base sm:text-lg md:text-xl text-gray-700 px-2">
         The page you are looking for was moved, removed renamed or might never
