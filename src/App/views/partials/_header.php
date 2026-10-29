@@ -34,6 +34,11 @@
             <a href="/" class="site-header__brand">
                 <span class="site-header__wordmark">PHPiggy</span>
             </a>
+
+    <header class="bg-indigo-900">
+        <nav class="mx-auto flex container items-center justify-between py-4" aria-label="Global">
+            <a href="/" class="-m-1.5 p-1.5 text-white text-2xl font-bold">ZouTracks</a>
+
             <!-- Navigation Links -->
             <div class="site-header__links">
                 <a href="/about" class="site-header__link">About</a>
