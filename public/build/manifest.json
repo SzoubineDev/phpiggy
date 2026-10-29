@@ -1,16 +1,16 @@
 {
   "resources/css/app.css": {
-    "file": "app-CDF8Qc9V.css",
+    "file": "app-BPSxLJxN.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/css/desktop.css": {
-    "file": "desktop-X2bvjn1l.css",
+    "file": "desktop-CxkzpTnF.css",
     "src": "resources/css/desktop.css",
     "isEntry": true
   },
   "resources/css/mobile.css": {
-    "file": "mobile-xJpdePBw.css",
+    "file": "mobile-CRZAlCSJ.css",
     "src": "resources/css/mobile.css",
     "isEntry": true
   }
