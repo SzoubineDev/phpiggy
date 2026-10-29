@@ -7,6 +7,7 @@
    mobile.css / desktop.css.
 
    Tailwind v4 scans the PHP views for utility classes and
+
    compiles ONLY what is used into this file.
    ============================================================ */
 @import "tailwindcss";
@@ -22,10 +23,92 @@
     }
 
     body {
-        margin: 0;
+        margin: 0 !important; /* kill any default/legacy body margin for good */
+        padding: 0;
         min-height: 100vh;
         background-color: var(--color-indigo-50);
         color: var(--color-gray-800);
+    }
+
+    /* Full-width layout container (replaces Tailwind's `container`,
+       which injected side margins on mobile). Breakpoints refine it
+       in mobile.css / desktop.css — never mixed. */
+    .layout {
+        width: 100%;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Centered narrow column for auth/profile panels (was max-w-2xl) */
+    .layout--narrow {
+        max-width: 42rem;
+    }
+
+    /* Flex-column page shell (was flex flex-col min-h-screen):
+       guaranteed via CSS so the sticky-footer layout never breaks
+       if a utility class is missing from a build sheet. */
+    .app-body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    /* Header internals (structure only — colors live in the brand
+       surfaces section below; sizes refined per breakpoint sheet) */
+    .site-header__nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .site-header__brand {
+        display: inline-flex;
+        align-items: center;
+        color: #fff;
+    }
+
+    .site-header__wordmark {
+        font-size: 1.25rem;
+        font-weight: 700;
+    }
+
+    .site-header__links {
+        display: flex;
+        align-items: center;
+    }
+
+    .site-header__link--cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        transition: background-color 150ms ease, color 150ms ease;
+    }
+
+    .site-header__link--cta svg {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    /* Footer internals */
+    .site-footer__inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+        font-size: 0.875rem;
+    }
+
+    .site-footer__link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 2.5rem;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -167,6 +250,76 @@
         background-color: var(--color-violet-200);
     }
 
+    /* ---------- Header / footer brand surfaces (always defined,
+       so the indigo chrome can never "disappear" if a Tailwind
+       utility is missing from a build sheet) ---------- */
+    .site-header {
+        background-color: var(--color-indigo-900);
+        color: #fff;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+    }
+
+    .site-footer {
+        background-color: var(--color-indigo-900);
+        color: var(--color-gray-300);
+    }
+
+    .site-header__link {
+        color: var(--color-gray-300);
+        transition: color 150ms ease;
+    }
+
+    .site-header__link:hover {
+        color: #fff;
+    }
+
+    .site-header__wordmark {
+        color: #fff;
+    }
+
+    .site-header__link--cta {
+        background-color: var(--color-indigo-600);
+        color: #fff;
+    }
+
+    .site-header__link--cta:hover {
+        background-color: var(--color-indigo-500);
+    }
+
+    .site-footer a {
+        color: var(--color-gray-300);
+        transition: color 150ms ease;
+    }
+
+    .site-footer a:hover {
+        color: #fff;
+    }
+
+    /* ---------- Pagination shell (structure only; arrow/link
+       styling is refined separately in mobile.css / desktop.css) */
+    .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid var(--color-gray-200);
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .pagination__side {
+        display: flex;
+        flex: 1 1 0%;
+        min-width: 0;
+    }
+
+    .pagination__side--end {
+        justify-content: flex-end;
+    }
+
+    .pagination__pages {
+        display: none; /* revealed on desktop by desktop.css */
+    }
+
     /* Small icon-only/text action chip (shared colors; sizing refined per breakpoint) */
     .action-chip {
         display: inline-flex;
@@ -224,4 +377,36 @@
         width: 1.25rem;
         color: var(--color-gray-400);
     }
+}
+/* Remove browser default spacing and fill the viewport */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+html {
+    background: #eef2ff;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+#app,
+.app-body {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
 }

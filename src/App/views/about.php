@@ -1,6 +1,6 @@
 <?php include $this->resolve("partials/_header.php"); ?>
 
-<section class="container mx-auto page-section panel">
+<section class="layout page-section panel">
     <!-- Page Title -->
     <h3 class="text-xl font-semibold text-gray-900 mb-4"><?= e($title) ?></h3>
 

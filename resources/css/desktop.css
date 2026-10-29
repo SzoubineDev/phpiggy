@@ -16,6 +16,19 @@
 @source "../../src/App/views";
 
 /* ---------- Desktop page shell ---------- */
+.layout {
+    max-width: 48rem; /* centered content column on desktop only */
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+main .layout,
+.site-header__nav,
+.site-footer__inner {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
 .page-section {
     margin-top: 3rem;
     margin-bottom: 3rem;
@@ -174,7 +187,8 @@
     color: var(--color-indigo-700);
 }
 
-/* ---------- Desktop table layout ---------- */
+/* ---------- Desktop table layout (desktop sheet = 768px+,
+   so no md: utilities needed; display is guaranteed here) ---------- */
 .tx-table {
     width: 100%;
     min-width: 100%;
@@ -182,6 +196,13 @@
     border-spacing: 0;
     table-layout: auto;
     margin-top: 1.5rem;
+    display: table; /* overrides the base `hidden` class in markup */
+}
+
+@media (max-width: 767.98px) {
+    .tx-table {
+        display: none; /* table never renders on phones */
+    }
 }
 
 .tx-table thead tr {
