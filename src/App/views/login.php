@@ -1,6 +1,6 @@
 <?php include $this->resolve("partials/_header.php"); ?>
 
-<section class="max-w-2xl mx-auto page-section panel">
+<section class="layout layout--narrow page-section panel">
     <form method="POST" class="grid grid-cols-1 gap-6">
 
         <?php include $this->resolve('/partials/_csrf.php'); ?>

@@ -1,6 +1,6 @@
 <?php include $this->resolve("partials/_header.php"); ?>
 <!-- Start Main Content Area -->
-<section class="container mx-auto page-section panel">
+<section class="layout page-section panel">
     <?php
     // Lightweight summary stats shown in both layouts (styled per breakpoint).
     $txCount = count($transactions);

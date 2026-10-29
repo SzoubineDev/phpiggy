@@ -1,6 +1,6 @@
 <?php include $this->resolve("partials/_header.php") ?>
 
-<section class="max-w-2xl mx-auto page-section">
+<section class="layout layout--narrow page-section">
     <div class="panel overflow-hidden p-0">
         <div class="bg-indigo-600 px-6 py-4">
             <h1 class="text-2xl font-bold text-white">
